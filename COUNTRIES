@@ -1,0 +1,20 @@
+import requests
+# Definir la URL base de la API del Banco Mundial
+base_url = "http://api.worldbank.org/v2/"
+# Endpoint para obtener información sobre todos los países
+endpoint = "countries"
+# Parámetros de la solicitud
+params = {
+    "format": "json",  # Formato de los datos de respuesta
+}
+# Realizar la solicitud GET
+response = requests.get(f"{base_url}{endpoint}", params=params)
+# Comprobar si la solicitud fue exitosa
+if response.status_code == 200:
+    # Convertir la respuesta a JSON
+    data = response.json()
+    # Imprimir los nombres de todos los países
+    for country in data[1]:
+        print(country["name"])
+else:
+    print("Error al realizar la solicitud:", response.status_code)
